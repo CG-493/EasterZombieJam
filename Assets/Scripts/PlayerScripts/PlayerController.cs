@@ -67,18 +67,18 @@ public class PlayerController : MonoBehaviour
         jumpAction.Disable();
     }
 
-    private void OnMove(InputAction.CallbackContext ctx)
+    public void OnMove(InputAction.CallbackContext ctx)
     {
         moveInput = ctx.ReadValue<Vector2>();
         Debug.Log("Moving");
     }
 
-    private void OnJump(InputAction.CallbackContext ctx)
+    public void OnJump(InputAction.CallbackContext ctx)
     {
         Debug.Log("Jumped");
     }
 
-    private void OnAttack(InputAction.CallbackContext ctx)
+    public void OnAttack(InputAction.CallbackContext ctx)
     {
         Debug.Log("Attacked");
     }
