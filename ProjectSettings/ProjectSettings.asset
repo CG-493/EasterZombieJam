@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
-  productGUID: 5720c8ab8c7f46c49bf7f95b3ee544c3
+  productGUID: c93c32fc188c7d84e946beee4eebe71a
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: EasterZombieJam
+  productName: Easter
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -688,14 +688,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: EasterZombieJam
+  metroPackageName: Easter
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: EasterZombieJam
+  metroApplicationDescription: Easter
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -766,10 +766,10 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 13fcba20-212e-47a8-9278-7cb744b777ad
+  cloudProjectId: e001eb68-e78a-45ae-bf88-f008174be46c
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: EasterZombieJam
+  projectName: Easter
   organizationId: unity_5fceaf777cefef951589
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
