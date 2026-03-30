@@ -30,8 +30,13 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         moveAction = pInputActions.FindAction("Player/Move");
-        attackAction = pInputActions.FindAction("Player/BasicAttack");
+        attackAction = pInputActions.FindAction("Player/Attack");
         jumpAction = pInputActions.FindAction("Player/Jump");
+
+        if (moveAction == null || jumpAction == null)
+        {
+            Debug.LogError("Input Actions missing! Check InputActions asset.");
+        }
     }
 
     private void OnEnable()
