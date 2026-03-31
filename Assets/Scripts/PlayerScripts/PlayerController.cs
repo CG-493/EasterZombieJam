@@ -17,14 +17,13 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("Movement Settings")]
-    public float walkSpeed = 4f;
-    public float sprintSpeed = 8f;
-    public float jumpForce = 5f;
-
-    private Rigidbody2D rb;
+    [SerializeField] private float speed = 4f;
+    [SerializeField] private Rigidbody2D rb;
     private Vector2 moveInput;
 
-    
+    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private BoxCollider2D rayCollider;
+    [SerializeField] LayerMask groundMask;
     
 
     private void Awake()
@@ -37,6 +36,13 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("Input Actions missing! Check InputActions asset.");
         }
+
+        rb = GetComponent<Rigidbody2D>();   
+    }
+
+    private void Update()
+    {
+        IsGrounded();
     }
 
     private void OnEnable()
@@ -70,16 +76,39 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext ctx)
     {
         moveInput = ctx.ReadValue<Vector2>();
+
+        Vector3 input = new Vector3(moveInput.x, 0, 0);
+        input = Vector3.ClampMagnitude(input, 1f);
+        Vector3 worldMovement = transform.TransformDirection(input) * speed;
+
+        rb.linearVelocity = new Vector2(
+            worldMovement.x,
+            rb.linearVelocity.y
+            );
+
         Debug.Log("Moving");
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
+        if(IsGrounded())
+        {
+            Debug.Log("OnGround");
+            rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpForce);
+        }
+
+
         Debug.Log("Jumped");
     }
 
     public void OnAttack(InputAction.CallbackContext ctx)
     {
         Debug.Log("Attacked");
+    }
+
+    private bool IsGrounded()
+    {
+        RaycastHit2D hit2D = Physics2D.BoxCast(rayCollider.bounds.center,rayCollider.bounds.size,0, Vector2.down, 0.1f);
+        return hit2D.collider != null;
     }
 }
