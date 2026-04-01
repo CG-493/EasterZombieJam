@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.Android.Gradle.Manifest;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,14 +19,18 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("Movement Settings")]
-    [SerializeField] private float speed = 4f;
+    [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D rb;
     private Vector2 moveInput;
 
-    [SerializeField] private float jumpForce = 5f;
-    [SerializeField] private BoxCollider2D rayCollider;
-    [SerializeField] LayerMask groundMask;
-    
+    [SerializeField] private float jumpForce;
+
+    [Header("Shooting Settings")]
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private float coolDown;
+    [SerializeField] private bool canFire;
+
 
     private void Awake()
     {
@@ -36,6 +42,8 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("Input Actions missing! Check InputActions asset.");
         }
+
+        canFire = true;
 
         rb = GetComponent<Rigidbody2D>();   
     }
@@ -86,29 +94,51 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity.y
             );
 
-        Debug.Log("Moving");
+        //Debug.Log("Moving");
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
         if(IsGrounded())
         {
-            Debug.Log("OnGround");
+            //Debug.Log("OnGround");
             rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpForce);
+
         }
 
 
-        Debug.Log("Jumped");
+       // Debug.Log("Jumped");
     }
 
     public void OnAttack(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Attacked");
+        Fire();
+
+       // Debug.Log("Attacked");
     }
 
     private bool IsGrounded()
     {
-        RaycastHit2D hit2D = Physics2D.BoxCast(rayCollider.bounds.center,rayCollider.bounds.size,0, Vector2.down, 0.1f);
-        return hit2D.collider != null;
+        return rb.linearVelocity.y == 0;
+    }
+
+    private void Fire()
+    {
+        if (!canFire)
+        {
+            return;
+        }
+        
+        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+
+        StartCoroutine(StartCooldown());
+    }
+
+    IEnumerator StartCooldown()
+    {
+        canFire = false;
+        yield return new WaitForSeconds(coolDown);
+
+        canFire = true;
     }
 }
