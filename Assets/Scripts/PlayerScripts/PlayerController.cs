@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float jumpForce;
 
+    [Header("Player Rotation")]
+    private bool facingRight = true;
+    private GameObject player;
+
     [Header("Shooting Settings")]
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
@@ -46,6 +50,7 @@ public class PlayerController : MonoBehaviour
         canFire = true;
 
         rb = GetComponent<Rigidbody2D>();   
+        player = this.gameObject;
     }
 
     private void Update()
@@ -94,7 +99,23 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity.y
             );
 
+        if (moveInput.x <= 0)
+        {
+            player.transform.localScale = new Vector3(-1, 5, 5);
+        }
+
+        if (moveInput.x > 0)
+        {
+            player.transform.localScale = new Vector3(1, 5, 5);
+        }
+
         //Debug.Log("Moving");
+    }
+
+    private void Flip()
+    {
+        facingRight = !facingRight;
+        transform.Rotate(0, 180, 0);
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
