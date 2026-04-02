@@ -6,23 +6,36 @@ public class Bullet : MonoBehaviour
     public int damage = 1;
     public float lifetime = 3f;
 
+    [SerializeField] float direction;
+
+    [SerializeField] private BoxCollider2D bullCollider;
     private bool hasHit = false;
+
+    private void Awake()
+    {
+        bullCollider = GetComponent<BoxCollider2D>();
+    }
 
     void Start()
     {
+
+        
+
         // Destroy bullet after some time
         Destroy(gameObject, lifetime);
     }
 
     void Update()
     {
-        // Move bullet forward
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        if (hasHit) return;
+        float movementSpeed = speed * Time.deltaTime * direction;
+        transform.Translate(movementSpeed, 0, 0);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (hasHit) return;
+        hasHit = true;
+        bullCollider.enabled = false;
 
         Debug.Log("Hit: " + collision.gameObject.name);
 
@@ -46,5 +59,21 @@ public class Bullet : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    public void SetDirection(float _direction)
+    {
+        direction = _direction;
+
+        gameObject.SetActive(true);
+
+        hasHit = false;
+        bullCollider.enabled = true;
+
+        float localScaleX = transform.localScale.x;
+        if (Mathf.Sign(localScaleX) != _direction)
+            localScaleX = -localScaleX;
+
+        transform.localScale = new Vector3(localScaleX, transform.localScale.y, transform.localScale.z);
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.Android.Gradle.Manifest;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -99,14 +98,14 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity.y
             );
 
-        if (moveInput.x <= 0)
+        if (moveInput.x < 0)
         {
-            player.transform.localScale = new Vector3(-1, 5, 5);
+            player.transform.localScale = new Vector3(-5, 5, 5);
         }
 
         if (moveInput.x > 0)
         {
-            player.transform.localScale = new Vector3(1, 5, 5);
+            player.transform.localScale = new Vector3(5, 5, 5);
         }
 
         //Debug.Log("Moving");
