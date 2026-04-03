@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -10,37 +11,43 @@ public class PlayerHealth : MonoBehaviour
     [Header("Game Over Settings")]
     public GameObject gOManager;
 
+    [Header("Potion")]
+    [SerializeField] int potionHealth;
+
+    [Header("UI")]
+    public TMP_Text healthUI;
+
+    [Header("enemy")]
+    GameObject en;
 
     private void Awake()
     {
         playerDead = false;
         gOManager = GameObject.Find("SceneManager");
+        en = 
+        UpdateUI();
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision");
-
-        if (collision.gameObject.CompareTag("Enemy"))
+        if(collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Enemy Collision");
-            
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-
-            if (enemy == null)
-            {
-                Debug.Log("NO Enemy script found!");
-            }
-            
-            else
-            {
-                Debug.Log("Player Take Damage");
-                PlayerDamage(enemy.damage);
-            }
+            PlayerDamage()
         }
     }
 
-    void PlayerDamage(int damage)
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Potion"))
+        {
+            PlayerRecover(potionHealth);
+
+            Destroy(collision);
+        }
+    }
+
+    public void PlayerDamage(int damage)
     {
         playerHealth -= damage;
         Debug.Log("Player took Damage");
@@ -51,9 +58,20 @@ public class PlayerHealth : MonoBehaviour
             manager.GameOver();
         }
 
-        
+        UpdateUI();
     }
 
+    void PlayerRecover(int recover)
+    {
+        playerHealth += recover;
 
+        UpdateUI();
+    }
+
+    void UpdateUI()
+    {
+
+        healthUI.text = "Health " + playerHealth; 
+    }
 
 }

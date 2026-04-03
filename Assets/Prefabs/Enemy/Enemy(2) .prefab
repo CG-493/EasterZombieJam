@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6395587563711915249}
   - component: {fileID: 90193802983028544}
   - component: {fileID: 8984478422833685320}
+  - component: {fileID: 6425731308887799019}
   - component: {fileID: 707994853367580443}
   - component: {fileID: 4010030332086120008}
   m_Layer: 0
@@ -106,6 +107,24 @@ MonoBehaviour:
   scoreValue: 100
   damage: 2
   scoreManager: {fileID: 0}
+  waves: {fileID: 0}
+--- !u!114 &6425731308887799019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7966295005308757284}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd18b29efb74e2048b657a7586def7d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  playerPos: {x: 0, y: 0, z: 0}
+  speed: 1
+  stoppingDistance: 2
+  attackRate: 3
 --- !u!61 &707994853367580443
 BoxCollider2D:
   m_ObjectHideFlags: 0

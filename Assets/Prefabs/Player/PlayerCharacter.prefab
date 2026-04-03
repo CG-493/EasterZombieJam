@@ -74,6 +74,7 @@ MonoBehaviour:
   playerHealth: 20
   playerDead: 0
   gOManager: {fileID: 0}
+  potionHealth: 4
 --- !u!212 &4928650555920210099
 SpriteRenderer:
   m_ObjectHideFlags: 0

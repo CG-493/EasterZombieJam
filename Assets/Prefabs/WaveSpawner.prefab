@@ -49,10 +49,12 @@ MonoBehaviour:
     cost: 2
   - enemyPrefab: {fileID: 7966295005308757284, guid: a0f19c3723c5d79449f76c39bd5cb884, type: 3}
     cost: 4
-  currWave: 0
+  currWave: 1
   waveValue: 0
   enemiesToSpawn: []
-  spawnLoc: []
+  spawnLoc:
+  - {fileID: 0}
+  - {fileID: 0}
   spawnIndex: 0
   waveDur: 0
   spawnedEnemies: []
