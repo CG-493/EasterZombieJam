@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private float coolDown;
     [SerializeField] private bool canFire;
+    public float dire;
 
 
     private void Awake()
@@ -101,11 +102,13 @@ public class PlayerController : MonoBehaviour
         if (moveInput.x < 0)
         {
             player.transform.localScale = new Vector3(-5, 5, 5);
+            dire = -1;
         }
 
         if (moveInput.x > 0)
         {
             player.transform.localScale = new Vector3(5, 5, 5);
+            dire = 1;
         }
 
         //Debug.Log("Moving");

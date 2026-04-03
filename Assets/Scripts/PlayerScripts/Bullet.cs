@@ -2,26 +2,31 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 10f;
-    public int damage = 1;
-    public float lifetime = 3f;
+    public float speed;
+    public int damage;
+    public float lifetime;
 
     [SerializeField] float direction;
+    public GameObject player;
+    PlayerController playerInfo;
 
     [SerializeField] private BoxCollider2D bullCollider;
     private bool hasHit = false;
+    [SerializeField] private Rigidbody2D rb;
 
     private void Awake()
     {
         bullCollider = GetComponent<BoxCollider2D>();
+        rb = GetComponent<Rigidbody2D>();
+        player = GameObject.Find("PlayerCharacter");
+        playerInfo = player.GetComponent<PlayerController>();
     }
 
     void Start()
     {
 
-        
-
-        // Destroy bullet after some time
+        SetDirection(playerInfo.dire);
+       
         Destroy(gameObject, lifetime);
     }
 
@@ -30,6 +35,8 @@ public class Bullet : MonoBehaviour
         if (hasHit) return;
         float movementSpeed = speed * Time.deltaTime * direction;
         transform.Translate(movementSpeed, 0, 0);
+
+        rb.linearVelocity = new Vector2(direction, 0);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -60,6 +67,7 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 
     public void SetDirection(float _direction)
     {
