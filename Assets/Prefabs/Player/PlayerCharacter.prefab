@@ -56,8 +56,9 @@ MonoBehaviour:
   jumpForce: 12
   bulletPrefab: {fileID: 3474741414534764427, guid: 2f0428d22c1cc5e4587fed45da33f7ed, type: 3}
   firePoint: {fileID: 2024634427742511339}
-  coolDown: 0.3
+  coolDown: 0.1
   canFire: 0
+  dire: 0
 --- !u!114 &5610080313114831533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4a48d2668022340b4210ab85cf8645, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: 4
+  playerHealth: 20
   playerDead: 0
   gOManager: {fileID: 0}
 --- !u!212 &4928650555920210099

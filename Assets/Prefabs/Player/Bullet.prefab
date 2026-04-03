@@ -107,7 +107,9 @@ MonoBehaviour:
   damage: 1
   lifetime: 3
   direction: 0
+  player: {fileID: 0}
   bullCollider: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!61 &786230747407332772
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -138,7 +140,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -180,7 +182,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &7974438950932336584
 GameObject:
   m_ObjectHideFlags: 0

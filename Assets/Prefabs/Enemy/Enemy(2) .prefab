@@ -105,6 +105,7 @@ MonoBehaviour:
   health: 7
   scoreValue: 100
   damage: 2
+  scoreManager: {fileID: 0}
 --- !u!61 &707994853367580443
 BoxCollider2D:
   m_ObjectHideFlags: 0

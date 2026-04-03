@@ -8,10 +8,12 @@ public class Enemy : MonoBehaviour
     public int damage;
 
     public GameObject scoreManager;
+    public GameObject waves;
 
     private void Awake()
     {
         scoreManager = GameObject.Find("ScoreManagerObject");
+        waves = GameObject.Find("WaveSpawner");
     }
 
     public void TakeDamage(int damage)
@@ -30,8 +32,11 @@ public class Enemy : MonoBehaviour
     {
         Debug.Log("Enemy died, adding score");
         ScoreManager manager = scoreManager.GetComponent<ScoreManager>();
+        WaveScript waveList = waves.GetComponent<WaveScript>();
 
+        waveList.spawnedEnemies.Remove(gameObject);
         manager.AddScore(scoreValue);
+
         Destroy(gameObject);
     }
 }
